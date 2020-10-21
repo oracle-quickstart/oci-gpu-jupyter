@@ -3,13 +3,13 @@
 # 
 
 output "ids" {
-  value = ["${oci_core_instance.linux_instance.*.id}"]
+  value = [oci_core_instance.linux_instance.*.id]
 }
 
 output "public_address" {
-  value = ["${oci_core_instance.linux_instance.*.public_ip}"]
+  value = [oci_core_instance.linux_instance.*.public_ip]
 }
 
 output "private_address" {
-  value = ["${oci_core_instance.linux_instance.*.private_ip}"]
+  value = [oci_core_instance.linux_instance.*.private_ip]
 }
