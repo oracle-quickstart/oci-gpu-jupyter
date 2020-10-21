@@ -36,11 +36,11 @@ module "single_instance_multiple_disks" {
 }
 
 resource "local_file" "jupyter" {
-  content = templatefile("${path.module}/scripts/configure_jupyter.tpl", {
+  content = templatefile("${path.module}/scripts/${var.script_to_run}.tpl", {
     jupyter_password = var.jupyter_password
     github_repo      = var.github_repo
   })
-  filename = "${path.module}/scripts/configure_jupyter.gen"
+  filename = "${path.module}/scripts/${var.script_to_run}.gen"
 }
 
 resource "null_resource" "configure_jupyterhub" {
@@ -55,13 +55,13 @@ resource "null_resource" "configure_jupyterhub" {
   }
 
   provisioner "file" {
-    source      = "${path.module}/scripts/configure_jupyter.gen"
+    source      = "${path.module}/scripts/${var.script_to_run}.gen"
     destination = "/tmp/${data.external.get_filename.result.r_filename}"
   }
 
   provisioner "file" {
-    source      = "${path.module}/scripts/configure_jupyter.gen"
-    destination = "/home/opc/start_jupyter.sh"
+    source      = "${path.module}/scripts/${var.script_to_run}.gen"
+    destination = "/home/opc/${var.script_to_run}.sh"
   }
 
   provisioner "remote-exec" {
