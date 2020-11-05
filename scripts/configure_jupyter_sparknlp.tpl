@@ -28,7 +28,7 @@ export JAVA_HOME=/usr/java/jre1.8.0_251-amd64
 
 # Install sparkNLP -- versions are important
 pip install --ignore-installed -q pyspark==2.4.4
-pip install --ignore-installed -q spark-nlp==2.5.0
+pip install --ignore-installed -q spark-nlp
 
 # Install Oracle client libraries
 sudo yum install -y oracle-instantclient18.3-basic.x86_64
