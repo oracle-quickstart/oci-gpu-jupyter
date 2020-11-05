@@ -6,7 +6,6 @@ resource "oci_core_instance" "linux_instance" {
   availability_domain = var.linux_availability_domain
   compartment_id      = var.compartment_ocid
   display_name        = "${var.app_tag}_${var.linux_description}_${var.environment}"
-  hostname_label      = lower(format("%.15s", format("%s%s%d", var.app_tag, var.linux_description, count.index)))
   shape               = var.linux_instance_shape
   count               = var.linux_count
 
@@ -23,6 +22,7 @@ resource "oci_core_instance" "linux_instance" {
     subnet_id              = var.linux_subnet_id
     skip_source_dest_check = var.linux_skip_source_dest_check
     assign_public_ip       = var.linux_assign_public_ip
+    hostname_label         = lower(format("%.15s", format("%s%s%d", var.app_tag, var.linux_description, count.index)))
   }
 
   metadata = {
@@ -50,7 +50,6 @@ resource "oci_core_volume" "linux_blocks" {
 resource "oci_core_volume_attachment" "script_blocks_attach" {
   attachment_type = "iscsi"
   count           = var.format_disk != true ? length(var.linux_mount_directory) > 1 ? var.linux_count * length(var.linux_mount_directory) : 0 : 0
-  compartment_id  = var.compartment_ocid
   instance_id     = element(oci_core_instance.linux_instance.*.id, count.index)
   volume_id       = element(oci_core_volume.linux_blocks.*.id, count.index)
 
@@ -83,7 +82,6 @@ resource "oci_core_volume_attachment" "script_blocks_attach" {
 resource "oci_core_volume_attachment" "linux_blocks_attach" {
   attachment_type = "iscsi"
   count           = var.format_disk == true ? length(var.linux_mount_directory) > 1 ? var.linux_count * length(var.linux_mount_directory) : 0 : 0
-  compartment_id  = var.compartment_ocid
   instance_id     = element(oci_core_instance.linux_instance.*.id, count.index)
   volume_id       = element(oci_core_volume.linux_blocks.*.id, count.index)
   use_chap        = true

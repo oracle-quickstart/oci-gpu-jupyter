@@ -72,10 +72,6 @@ variable "InstanceImageOCID" {
   }
 }
 
-variable "script_to_run" {
-  default = "configure_jupyter.sh"
-}
-
 variable "app_tag" {
   default = "verify"
 }
@@ -118,7 +114,25 @@ variable "jupyter_password" {
   default = "welcome1"
 }
 
+# Set up environment for sparkNLP including: java, spark, scala, hadoop
+# default = "configure_jupyter_sparknlp"
+
+# Set up environment for completing configuration of JupyterNotebooks and cx_oracle 
+# default = "configure_jupyter"
+
+variable "script_to_run" {
+  default = "configure_jupyter_sparknlp"
+}
+
+# Spark NLP Workshop: https://github.com/JohnSnowLabs/spark-nlp-workshop
+# Spark NLP Repo: https://github.com/JohnSnowLabs/spark-nlp
+
+# Tenssorflow example notebooks 
+# default = "https://github.com/aymericdamien/TensorFlow-Examples"
+
+# PyTorch Learning 
+# default = "https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html"
 variable "github_repo" {
-  default = "https://github.com/JohnSnowLabs/spark-nlp.git"
+  default = "https://github.com/JohnSnowLabs/spark-nlp-workshop"
 }
 
