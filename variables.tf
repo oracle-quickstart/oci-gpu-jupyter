@@ -133,6 +133,6 @@ variable "script_to_run" {
 # PyTorch Learning 
 # default = "https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html"
 variable "github_repo" {
-  default = "https://github.com/JohnSnowLabs/spark-nlp.git"
+  default = "https://github.com/JohnSnowLabs/spark-nlp-workshop"
 }
 
