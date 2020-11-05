@@ -20,8 +20,10 @@ touch /home/opc/completed.mlenv
 
 # sudo yum upgrade
 
-# Install OpenJDK JRE 8
-sudo yum install -y openjdk-8-jre-headless
+# Java is alread installed, however if JDK is needed, use:
+# sudo yum install -y openjdk-8-jre-headless
+
+# Ensure Java can be found
 export JAVA_HOME=/usr/java/jre1.8.0_251-amd64
 
 # Install sparkNLP -- versions are important
