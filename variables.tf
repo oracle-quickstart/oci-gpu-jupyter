@@ -73,7 +73,7 @@ variable "InstanceImageOCID" {
 }
 
 variable "app_tag" {
-  default = "verify"
+  default = "spacy"
 }
 
 variable "app_description" {
@@ -121,7 +121,7 @@ variable "jupyter_password" {
 # default = "configure_jupyter"
 
 variable "script_to_run" {
-  default = "configure_jupyter_sparknlp"
+  default = "configure_spacy"
 }
 
 # Spark NLP Workshop: https://github.com/JohnSnowLabs/spark-nlp-workshop
@@ -132,7 +132,16 @@ variable "script_to_run" {
 
 # PyTorch Learning 
 # default = "https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html"
+
+# NLP Learning Lessons
+# default = "https://github.com/bpben/nlp_lessons"
+
+# Notebooks for an online course from Ines Montani, who is one of the core developers for spaCy
+# Course is at: https://course.spacy.io/, and the original github at:
+# default = https://github.com/ines/spacy-course
+# The Jupyter notebook version of the course is at:
+# default = "https://github.com/Cristianasp/spacy"
 variable "github_repo" {
-  default = "https://github.com/JohnSnowLabs/spark-nlp-workshop"
+  default = "https://github.com/Cristianasp/spacy"
 }
 

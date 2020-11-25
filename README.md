@@ -42,3 +42,23 @@ provisioned.
 
 
 
+spaCy
+NLP Course delivered by Ben Batorsky at Harvard Extension
+https://github.com/bpben/nlp_lessons
+
+Full flow of sentiment analysis:
+https://awesomeopensource.com/project/bentrevett/pytorch-sentiment-analysis
+https://github.com/bentrevett/pytorch-sentiment-analysis
+
+
+YouTube for sentiment analysis:
+https://www.youtube.com/watch?v=cd51nXNpiiU&feature=youtu.be
+
+Blog for sentiment analysis:
+https://kgptalkie.com/amazon-and-imdb-review-sentiment-classification-using-spacy/
+
+Associated Dataset ( github )
+https://github.com/laxmimerit/NLP-Tutorial-8---Sentiment-Classification-using-SpaCy-for-IMDB-and-Amazon-Review-Dataset
+
+Sentiment analysis with LSTM & pre-trained model
+https://medium.com/analytics-vidhya/training-your-own-sentiment-analyzer-with-spacy-9b924df1514c
