@@ -62,3 +62,8 @@ https://github.com/laxmimerit/NLP-Tutorial-8---Sentiment-Classification-using-Sp
 
 Sentiment analysis with LSTM & pre-trained model
 https://medium.com/analytics-vidhya/training-your-own-sentiment-analyzer-with-spacy-9b924df1514c
+
+Known issues with spaCy:
+KeyError: "[E018] Can't retrieve string for hash '3197928453018144401'. This usually refers to an issue with the Vocab or StringStore."
+
+https://github.com/explosion/spaCy/issues/1985
