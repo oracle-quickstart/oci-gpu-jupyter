@@ -46,6 +46,6 @@
 
 * backup_policy -- The backup policy the disks are associated with. Default is 'silver'.
 
-* jupyter_password -- The password for all users for the newly created Jupyter notebook. Default is 'welcome1'.
+* jupyter_password -- The password for all users for the newly created Jupyter notebook. No default is provided.
 
 * github_repo -- The git repo to download and make available for the notebooks. 
