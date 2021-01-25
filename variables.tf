@@ -14,8 +14,9 @@ variable "fingerprint" {
 variable "private_key_path" {
 }
 
+# A region is required to identify where the resources will live. An example is 'us-ashburn-1'
 variable "region" {
-  default = "us-ashburn-1"
+  default = ""
 }
 
 variable "private_key_password" {
@@ -65,10 +66,10 @@ variable "InstanceImageOCID" {
   default = {
     // See https://docs.us-phoenix-1.oraclecloud.com/images/
     // Oracle-provided image "Oracle-Linux-7.4-2018.02.21-1"
-    us-phoenix-1   = "ocid1.image.oc1.phx.aaaaaaaaupbfz5f5hdvejulmalhyb6goieolullgkpumorbvxlwkaowglslq"
-    us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaajlw3xfie2t5t52uegyhiq2npx7bqyu4uvi2zyu3w3mqayc2bxmaa"
-    eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7d3fsb6272srnftyi4dphdgfjf6gurxqhmv6ileds7ba3m2gltxq"
-    uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaaa6h6gj6v4n56mqrbgnosskq63blyv2752g36zerymy63cfkojiiq"
+    us-phoenix-1   = "<OCID for image in phoenix region>"
+    us-ashburn-1   = "<OCID for image in ashburn region>"
+    eu-frankfurt-1 = "<OCID for image in frankfurt region>"
+    uk-london-1    = "<OCID for image in london region>"
   }
 }
 
@@ -88,14 +89,16 @@ variable "app_environment" {
 # or stash it into a variable
 # export myid=`oci compute pic listing list --all | jq ' .data[] | select(."display-name" == "AI (All-in-One) GPU Image for Data Science")."listing-id" '  | tr -d '"' `
 # echo $myid
+# The mp_listing_id will contain the characters ocid1.appcataloglisting at the beginning of the ocid.
 variable "mp_listing_id" {
-  default = "ocid1.appcataloglisting.oc1..aaaaaaaachivaakhl6nkqkze3d3f5yqtwabaeomgw6qauya5q4clciacw7qa"
+  default = ""
 }
 
 # Using the listing id in an exported varaible, get the resource id and resource version
 # oci compute pic version list --listing-id $myid | jq ' .data[0] | { "listing-resource-id", "listing-resource-version"  }'
+# The mp_listing_resource_id will contain the characters ocid1.image at the beginning of the ocid value.
 variable "mp_listing_resource_id" {
-  default = "ocid1.image.oc1..aaaaaaaa4cqfimd27o5xdz2gd7w2hoarfb32phr6vrd4vphznyb3wxgtzoia"
+  default = ""
 }
 
 variable "mp_listing_resource_version" {
@@ -110,8 +113,9 @@ variable "backup_policy" {
   default = "silver"
 }
 
+# A password for jupyter is required.
 variable "jupyter_password" {
-  default = "welcome1"
+  default = ""
 }
 
 # Set up environment for sparkNLP including: java, spark, scala, hadoop
