@@ -77,11 +77,11 @@ variable "format_disk" {
 }
 
 variable "mp_listing_id" {
-  default = "ocid1.appcataloglisting.oc1..aaaaaaaaqvaab7wp7j32a7npi2fz5zrfub5izsd6xtfi5pp4wbsg4y7uktja"
+  default = ""
 }
 
 variable "mp_listing_resource_id" {
-  default = "ocid1.image.oc1..aaaaaaaatkwy3262nt2wxvmdnkecwwswvpqi6keewzjwvsjyogxuhnlqjxea"
+  default = ""
 }
 
 variable "mp_listing_resource_version" {

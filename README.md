@@ -23,7 +23,7 @@ $ terraform apply
 * This automation uses ssh redirection for security. This provides for secure access to the notebooks. This approach is not recommended for a team environment.  A sample ssh redirect command is below. The output from terraform apply will display a custom command for your environment.
 
 ```
-ssh -i ~/.ssh/rajesh_key -L 8081:localhost:8080 opc@150.136.128.214
+ssh -i <path to private key> -L 8081:localhost:8080 opc@<IP address of VM created>
 ```
 
 * Use your local browser to connect to the Jupyter
