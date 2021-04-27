@@ -12,27 +12,30 @@ provider "oci" {
 }
 
 module "single_instance_multiple_disks" {
-  source                    = "./linux"
-  tenancy_ocid              = var.tenancy_ocid
-  compartment_ocid          = var.compartment_ocid
-  app_tag                   = var.app_tag
-  environment               = var.app_environment
-  vcn_cidr                  = ""
-  vcn_id                    = ""
-  format_disk               = true
-  linux_bootstrap_file      = "./scripts/empty_script.sh"
-  linux_image_ocid          = var.mp_listing_resource_id
-  linux_ssh_public_key      = file(var.ssh_public_key)
-  linux_ssh_private_key     = var.ssh_private_key
-  linux_size_in_gbs         = [var.volume_size_in_gbs, var.volume_size_in_gbs]
-  linux_mount_directory     = ["/test/data", "/test/data1"]
-  linux_assign_public_ip    = true
-  linux_description         = var.app_description
-  linux_instance_shape      = var.instance_shape
-  linux_count               = var.number_instances
-  linux_availability_domain = data.template_file.ad_names[0].rendered
-  linux_subnet_id           = oci_core_subnet.web_subnetAD1.id
-  linux_backup_policy       = var.backup_policy
+  source                      = "./linux"
+  tenancy_ocid                = var.tenancy_ocid
+  compartment_ocid            = var.compartment_ocid
+  app_tag                     = var.app_tag
+  environment                 = var.app_environment
+  vcn_cidr                    = ""
+  vcn_id                      = ""
+  format_disk                 = true
+  mp_listing_id               = var.mp_listing_id
+  mp_listing_resource_id      = var.mp_listing_resource_id
+  mp_listing_resource_version = var.mp_listing_resource_version
+  linux_bootstrap_file        = "./scripts/empty_script.sh"
+  linux_image_ocid            = var.mp_listing_resource_id
+  linux_ssh_public_key        = file(var.ssh_public_key)
+  linux_ssh_private_key       = var.ssh_private_key
+  linux_size_in_gbs           = [var.volume_size_in_gbs, var.volume_size_in_gbs]
+  linux_mount_directory       = ["/test/data", "/test/data1"]
+  linux_assign_public_ip      = true
+  linux_description           = var.app_description
+  linux_instance_shape        = var.instance_shape
+  linux_count                 = var.number_instances
+  linux_availability_domain   = data.template_file.ad_names[0].rendered
+  linux_subnet_id             = oci_core_subnet.web_subnetAD1.id
+  linux_backup_policy         = var.backup_policy
 }
 
 resource "local_file" "jupyter" {

@@ -85,7 +85,7 @@ variable "mp_listing_resource_id" {
 }
 
 variable "mp_listing_resource_version" {
-  default = "1.1"
+  default = ""
 }
 
 variable "use_marketplace_image" {
