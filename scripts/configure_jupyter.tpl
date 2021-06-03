@@ -20,6 +20,9 @@ touch /home/opc/completed.mlenv
 # Install Oracle client libraries
 sudo yum install -y oracle-instantclient18.3-basic.x86_64
 
+# Upgrade pip to latest version
+python -m pip install --upgrade pip
+
 # Register mlenv with Python Notebooks as a kernel
 pip install ipykernel
 python -m ipykernel install --user --name=mlenv
@@ -28,6 +31,8 @@ python -m ipykernel install --user --name=mlenv
 pip install jupyter-sql
 pip install ipython-sql
 pip install cx_oracle
+pip install ray
+pip install --upgrade torch
 
 touch /home/opc/completed.pip.install
 

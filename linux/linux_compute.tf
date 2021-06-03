@@ -5,7 +5,7 @@
 resource "oci_core_instance" "linux_instance" {
   availability_domain = var.linux_availability_domain
   compartment_id      = var.compartment_ocid
-  display_name        = "${var.app_tag}_${var.linux_description}_${var.environment}"
+  display_name        = "${var.app_tag}_${var.linux_description}_${var.environment}_${count.index}"
   shape               = var.linux_instance_shape
   count               = var.linux_count
 
@@ -49,7 +49,7 @@ resource "oci_core_volume" "linux_blocks" {
 
 resource "oci_core_volume_attachment" "script_blocks_attach" {
   attachment_type = "iscsi"
-  count           = var.format_disk != true ? length(var.linux_mount_directory) > 1 ? var.linux_count * length(var.linux_mount_directory) : 0 : 0
+  count           = var.format_disk != true ? length(var.linux_mount_directory) > 0 ? var.linux_count * length(var.linux_mount_directory) : 0 : 0
   instance_id     = element(oci_core_instance.linux_instance.*.id, count.index)
   volume_id       = element(oci_core_volume.linux_blocks.*.id, count.index)
 
@@ -81,7 +81,7 @@ resource "oci_core_volume_attachment" "script_blocks_attach" {
 
 resource "oci_core_volume_attachment" "linux_blocks_attach" {
   attachment_type = "iscsi"
-  count           = var.format_disk == true ? length(var.linux_mount_directory) > 1 ? var.linux_count * length(var.linux_mount_directory) : 0 : 0
+  count           = var.format_disk == true ? length(var.linux_mount_directory) > 0 ? var.linux_count * length(var.linux_mount_directory) : 0 : 0
   instance_id     = element(oci_core_instance.linux_instance.*.id, count.index)
   volume_id       = element(oci_core_volume.linux_blocks.*.id, count.index)
   use_chap        = true
@@ -133,16 +133,16 @@ resource "oci_core_volume_attachment" "linux_blocks_attach" {
       "sudo -s bash -c \"mkfs.ext4 -F $device\" ",
 
       # Create a directory in the OS to mount the new filesystem.
-      "sudo -s bash -c 'mkdir -p ${var.linux_mount_directory[count.index]}'",
+      "sudo -s bash -c 'mkdir -p ${var.linux_mount_directory[count.index % length(var.linux_mount_directory)]}'",
 
       # Mount the filesystem so that it's available.
-      "sudo -s bash -c \"mount -t ext4 $device ${var.linux_mount_directory[count.index]} \" ",
+      "sudo -s bash -c \"mount -t ext4 $device ${var.linux_mount_directory[count.index % length(var.linux_mount_directory)]} \" ",
 
       # Find the UUID of the iscsi volume.
       "uuid=$(sudo blkid | grep $device | awk '{print $2}')",
 
       # Ensure the filesystem is loaded on a reboot of the instance.
-      "echo \"$uuid ${var.linux_mount_directory[count.index]} ext4 defaults,noatime,_netdev,nofail    0   2\" | sudo tee --append /etc/fstab > /dev/null",
+      "echo \"$uuid ${var.linux_mount_directory[count.index % length(var.linux_mount_directory)]} ext4 defaults,noatime,_netdev,nofail    0   2\" | sudo tee --append /etc/fstab > /dev/null",
     ]
   }
 }

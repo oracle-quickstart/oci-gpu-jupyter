@@ -105,7 +105,7 @@ resource "oci_core_security_list" "private_subnet" {
 }
 
 resource "oci_core_subnet" "web_subnetAD1" {
-  availability_domain = data.oci_identity_availability_domains.ad.availability_domains[0]["name"]
+  availability_domain = data.template_file.requested_ad.rendered
   cidr_block          = local.web_submnet_cidr
   display_name        = "web_subnetAD1"
   compartment_id      = var.compartment_ocid
@@ -122,7 +122,7 @@ resource "oci_core_subnet" "web_subnetAD1" {
 }
 
 resource "oci_core_subnet" "private_subnetAD1" {
-  availability_domain        = data.oci_identity_availability_domains.ad.availability_domains[0]["name"]
+  availability_domain        = data.template_file.requested_ad.rendered
   cidr_block                 = local.private_subnet_cidr
   display_name               = "private_subnetAD1"
   compartment_id             = var.compartment_ocid
