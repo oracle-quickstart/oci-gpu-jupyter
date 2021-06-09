@@ -37,7 +37,9 @@ resource "oci_core_route_table" "route_for_complete" {
   display_name   = "${var.app_tag}_${var.app_description}_${var.app_environment}_rt"
 
   route_rules {
-    cidr_block        = "0.0.0.0/0"
+    #    cidr_block        = "0.0.0.0/0"
+    destination_type  = "CIDR_BLOCK"
+    destination       = "0.0.0.0/0"
     network_entity_id = oci_core_internet_gateway.complete_ig.id
   }
   freeform_tags = {
